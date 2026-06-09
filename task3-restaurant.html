@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AMMA MUDDHA — Village Kitchen</title>
+<meta name="description" content="Slow-cooked Andhra & Telangana village food, served the way grandmother made it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#1a0f08;color:#f5ebd6;font-family:'Inter',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+  .serif{font-family:'Cormorant Garamond',serif}
+  /* header */
+  header{position:absolute;inset:0 0 auto;z-index:20;padding:1.5rem 2rem}
+  .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .nav a.back{color:rgba(245,235,214,.7);text-decoration:none;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+  .nav a.back:hover{color:#fcd34d}
+  .brand{text-align:center}
+  .brand h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;letter-spacing:.15em;font-weight:600}
+  .brand small{display:block;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(252,211,77,.8);margin-top:2px}
+  .reserve{border:1px solid rgba(252,211,77,.4);border-radius:9999px;padding:.5rem 1rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#fde68a;text-decoration:none;transition:.2s}
+  .reserve:hover{background:rgba(252,211,77,.1)}
+  /* hero */
+  .hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;animation:zoom 20s ease-out infinite alternate}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,15,8,.3) 0%,rgba(26,15,8,.4) 50%,#1a0f08 100%)}
+  @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.1)}}
+  .hero-content{position:relative;z-index:2;text-align:center;padding:0 1.5rem;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+  .hero-content .eyebrow{font-size:.7rem;letter-spacing:.5em;color:#fcd34d;text-transform:uppercase}
+  .hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,10vw,7rem);line-height:.9;margin-top:1.5rem;font-weight:600}
+  .hero-content h1 em{font-weight:300;color:#fcd34d}
+  .hero-content p{max-width:540px;margin:1.5rem auto 0;color:rgba(245,235,214,.75);font-size:1.05rem}
+  .cta{display:inline-block;margin-top:2.5rem;background:#fcd34d;color:#1a0f08;padding:1rem 2.25rem;border-radius:9999px;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;text-decoration:none;transition:.25s}
+  .cta:hover{background:#fde68a;transform:translateY(-2px);box-shadow:0 12px 40px -10px rgba(252,211,77,.5)}
+  /* about strip */
+  .strip{background:#231509;padding:4rem 1.5rem;text-align:center;border-block:1px solid rgba(252,211,77,.08)}
+  .strip blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.25rem,3vw,1.75rem);font-style:italic;color:#f5ebd6;max-width:760px;margin:0 auto;line-height:1.5}
+  .strip blockquote::before{content:""";color:#fcd34d;font-size:3rem;line-height:0;vertical-align:-.3em;margin-right:.25rem}
+  .strip blockquote::after{content:""";color:#fcd34d;font-size:3rem;line-height:0;vertical-align:-.3em;margin-left:.25rem}
+  /* menu */
+  .menu{max-width:1200px;margin:0 auto;padding:6rem 1.5rem}
+  .menu-head{text-align:center}
+  .menu-head .eyebrow{font-size:.7rem;letter-spacing:.4em;color:#fcd34d;text-transform:uppercase}
+  .menu-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4rem);margin-top:1rem;font-weight:600}
+  .cats{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:3rem 0}
+  .cat-btn{background:transparent;border:1px solid rgba(252,211,77,.3);color:rgba(245,235,214,.7);padding:.5rem 1.25rem;border-radius:9999px;font:inherit;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.2s}
+  .cat-btn:hover{border-color:rgba(252,211,77,.6)}
+  .cat-btn.active{background:#fcd34d;color:#1a0f08;border-color:#fcd34d}
+  .grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+  .dish{display:flex;gap:1.25rem;background:#231509;border:1px solid rgba(252,211,77,.08);border-radius:1rem;padding:1rem;transition:.35s;animation:fadeUp .8s both;opacity:0}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .dish:hover{border-color:rgba(252,211,77,.4);transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(0,0,0,.7)}
+  .dish.hide{display:none}
+  .dish-img{flex:none;width:120px;height:120px;border-radius:.75rem;overflow:hidden}
+  .dish-img img{width:100%;height:100%;object-fit:cover;transition:.6s}
+  .dish:hover .dish-img img{transform:scale(1.08)}
+  .dish-body{flex:1;min-width:0}
+  .dish-head{display:flex;justify-content:space-between;align-items:baseline;gap:.75rem}
+  .dish-head h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600}
+  .price{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#fcd34d;font-weight:600;white-space:nowrap}
+  .dish-body p{margin-top:.35rem;font-size:.85rem;color:rgba(245,235,214,.6);line-height:1.5}
+  .tag{display:inline-block;margin-top:.6rem;border:1px solid rgba(252,211,77,.4);color:#fcd34d;font-size:.6rem;padding:.15rem .65rem;border-radius:9999px;letter-spacing:.2em;text-transform:uppercase}
+  /* footer */
+  footer{border-top:1px solid rgba(252,211,77,.1);padding:3rem 1.5rem;text-align:center;color:rgba(245,235,214,.4);font-size:.75rem}
+  @media(max-width:520px){
+    .dish{flex-direction:column}
+    .dish-img{width:100%;height:200px}
+    .reserve{display:none}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="back" href="../">← Projects</a>
+    <div class="brand"><h2>AMMA MUDDHA</h2><small>Village Kitchen</small></div>
+    <a class="reserve" href="#menu">Reserve</a>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/e077b5ad-585a-42a2-857f-5a3357d1ff28/food-hero.jpg" alt="Village thali">
+  <div class="hero-content">
+    <p class="eyebrow">Est. From The Soil</p>
+    <h1>Amma <em>Muddha</em></h1>
+    <p>Slow-cooked village food from the hearts of Andhra & Telangana — millets, mud-pot curries, banana-leaf meals.</p>
+    <a class="cta" href="#menu">View the Menu</a>
+  </div>
+</section>
+
+<section class="strip">
+  <blockquote>Every plate is grandmother's recipe — clay-pot slow cooked, ground on stone, finished on wood fire.</blockquote>
+</section>
+
+<section class="menu" id="menu">
+  <div class="menu-head">
+    <p class="eyebrow">The Menu</p>
+    <h2>Made with grandmother's hands</h2>
+  </div>
+  <div class="cats">
+    <button class="cat-btn active" data-cat="All">All</button>
+<button class="cat-btn" data-cat="Mains">Mains</button>
+<button class="cat-btn" data-cat="Breads">Breads</button>
+<button class="cat-btn" data-cat="Breakfast">Breakfast</button>
+<button class="cat-btn" data-cat="Sweets">Sweets</button>
+<button class="cat-btn" data-cat="Drinks">Drinks</button>
+  </div>
+  <div class="grid" id="grid">
+    
+        <article class="dish" data-cat="Mains" style="animation-delay:0ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/dea369c3-2527-40e3-87fa-2d23b26235f6/food-ragi.jpg" alt="Ragi Sangati & Natu Kodi Pulusu" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Ragi Sangati & Natu Kodi Pulusu</h3>
+              <span class="price">₹240</span>
+            </div>
+            <p>Finger-millet balls with country chicken curry — the soul of every Telugu village kitchen.</p>
+            <span class="tag">Signature</span>
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Mains" style="animation-delay:60ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/295873f3-ff3a-4e0b-b6b0-3e3c57bd109b/food-mutton.jpg" alt="Telangana Mutton Curry" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Telangana Mutton Curry</h3>
+              <span class="price">₹320</span>
+            </div>
+            <p>Bone-in mutton simmered in stone-ground Telangana masala. Smoky, spicy, unforgettable.</p>
+            <span class="tag">Spicy</span>
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Mains" style="animation-delay:120ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/1af125ca-e40e-4972-9524-0415164ffc84/food-chapala.jpg" alt="Chapala Pulusu" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Chapala Pulusu</h3>
+              <span class="price">₹290</span>
+            </div>
+            <p>Andhra tangy fish curry — tamarind, fresh fenugreek leaves & a clay-pot finish.</p>
+            <span class="tag">Tangy</span>
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Mains" style="animation-delay:180ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/20322bbd-d0d7-4923-9c4f-f7de76e1d4dd/food-royyala.jpg" alt="Royyala Vepudu" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Royyala Vepudu</h3>
+              <span class="price">₹310</span>
+            </div>
+            <p>Crispy prawn fry coated in red Andhra masala, finished on a cast-iron pan.</p>
+            
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Mains" style="animation-delay:240ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/314ac944-2c57-456f-9952-93aada69c529/food-gongura-chicken.jpg" alt="Gongura Chicken" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Gongura Chicken</h3>
+              <span class="price">₹280</span>
+            </div>
+            <p>Tender country chicken slow-cooked with sorrel leaves — sour, fiery, rustic.</p>
+            
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Mains" style="animation-delay:300ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/5d31b5b4-ba1a-464f-950f-3d0895738c8c/food-gongura-mutton.jpg" alt="Gongura Mamsam" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Gongura Mamsam</h3>
+              <span class="price">₹330</span>
+            </div>
+            <p>Andhra's most iconic mutton — sorrel leaves, mutton fat & fistfuls of red chilli.</p>
+            <span class="tag">Iconic</span>
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Mains" style="animation-delay:360ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/314ac944-2c57-456f-9952-93aada69c529/food-gongura-chicken.jpg" alt="Natu Kodi Kura" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Natu Kodi Kura</h3>
+              <span class="price">₹260</span>
+            </div>
+            <p>Free-range country chicken in a fiery onion-coconut masala. Eat with steamed rice.</p>
+            
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Mains" style="animation-delay:420ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/55aff655-572c-4a1f-9a42-63adf0dc2ac9/food-pulihora.jpg" alt="Pulihora" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Pulihora</h3>
+              <span class="price">₹140</span>
+            </div>
+            <p>Tangy tamarind rice tempered with peanuts, mustard seeds & curry leaves.</p>
+            
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Breads" style="animation-delay:480ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/ac328807-d238-4a6e-87a1-ad169f10d90d/food-jonna.jpg" alt="Jonna Roti & Pachadi" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Jonna Roti & Pachadi</h3>
+              <span class="price">₹130</span>
+            </div>
+            <p>Hand-patted sorghum flatbread served with fresh green chutney.</p>
+            
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Breads" style="animation-delay:540ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/ac328807-d238-4a6e-87a1-ad169f10d90d/food-jonna.jpg" alt="Sajjala Roti & Karam" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Sajjala Roti & Karam</h3>
+              <span class="price">₹110</span>
+            </div>
+            <p>Pearl-millet roti with garlic-chilli chutney — a Telangana farmer's lunch.</p>
+            
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Breakfast" style="animation-delay:600ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/ef1e31f0-3af7-420e-bb9a-8692829aafd5/food-pesarattu.jpg" alt="Pesarattu Upma" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Pesarattu Upma</h3>
+              <span class="price">₹120</span>
+            </div>
+            <p>Green moong dosa with ginger chutney & ghee upma.</p>
+            
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Sweets" style="animation-delay:660ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/cf781538-dc59-4210-8c52-20157da4f039/food-bobbatlu.jpg" alt="Bobbatlu (Bakshalu)" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Bobbatlu (Bakshalu)</h3>
+              <span class="price">₹100</span>
+            </div>
+            <p>Jaggery & chana stuffed flatbread, drenched in pure ghee.</p>
+            <span class="tag">Sweet</span>
+          </div>
+        </article>
+
+        <article class="dish" data-cat="Drinks" style="animation-delay:720ms">
+          <div class="dish-img"><img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/ff6ca54b-b8bf-4e4e-9c2d-570b4960e871/food-majjiga.jpg" alt="Majjiga (Spiced Buttermilk)" loading="lazy"></div>
+          <div class="dish-body">
+            <div class="dish-head">
+              <h3>Majjiga (Spiced Buttermilk)</h3>
+              <span class="price">₹60</span>
+            </div>
+            <p>Cooling buttermilk with curry leaves, ginger & green chilli.</p>
+            
+          </div>
+        </article>
+  </div>
+</section>
+
+<footer>© AMMA MUDDHA · A CodSoft UI/UX Task</footer>
+
+<script>
+  const btns=document.querySelectorAll('.cat-btn');
+  const dishes=document.querySelectorAll('.dish');
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const c=b.dataset.cat;
+    dishes.forEach(d=>{
+      d.classList.toggle('hide', c!=='All' && d.dataset.cat!==c);
+    });
+  }));
+  // reveal on scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.style.animationPlayState='running';}),{threshold:.15});
+  dishes.forEach(d=>{d.style.animationPlayState='paused';io.observe(d);});
+</script>
+</body>
+</html>

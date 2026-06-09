@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Task 1 - Personalized Mobile Sign-Up | Codsoft</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+  body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+  .phone { width: 100%; max-width: 400px; background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.3); padding: 32px 24px; }
+  .progress { display: flex; gap: 8px; margin-bottom: 28px; }
+  .dot { flex: 1; height: 6px; border-radius: 3px; background: #eee; transition: .3s; }
+  .dot.active { background: #667eea; }
+  h2 { color: #333; margin-bottom: 8px; font-size: 24px; }
+  p.sub { color: #777; margin-bottom: 24px; font-size: 14px; }
+  input, select { width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 15px; margin-bottom: 14px; outline: none; }
+  input:focus, select:focus { border-color: #667eea; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .chip { padding: 10px 16px; border: 2px solid #e0e0e0; border-radius: 20px; cursor: pointer; font-size: 14px; user-select: none; }
+  .chip.selected { background: #667eea; color: #fff; border-color: #667eea; }
+  .row { display: flex; gap: 10px; margin-top: 20px; }
+  button { flex: 1; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .btn-primary { background: #667eea; color: #fff; }
+  .btn-back { background: #f0f0f0; color: #555; }
+  .step { display: none; }
+  .step.active { display: block; animation: fade .3s; }
+  @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+  .done { text-align: center; padding: 20px 0; }
+  .done .check { width: 80px; height: 80px; margin: 0 auto 20px; background: #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 40px; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="progress">
+    <div class="dot active" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+    <div class="dot" id="d4"></div>
+  </div>
+
+  <div class="step active" id="s1">
+    <h2>Welcome 👋</h2>
+    <p class="sub">Let's get to know you. What's your name?</p>
+    <input id="name" placeholder="Your full name" />
+    <input id="email" type="email" placeholder="Email address" />
+    <div class="row"><button class="btn-primary" onclick="next(1)">Continue</button></div>
+  </div>
+
+  <div class="step" id="s2">
+    <h2>A bit about you</h2>
+    <p class="sub">Help us personalize your experience.</p>
+    <input id="age" type="number" placeholder="Age" />
+    <select id="gender"><option value="">Gender</option><option>Female</option><option>Male</option><option>Other</option></select>
+    <div class="row"><button class="btn-back" onclick="prev(2)">Back</button><button class="btn-primary" onclick="next(2)">Continue</button></div>
+  </div>
+
+  <div class="step" id="s3">
+    <h2>Your interests</h2>
+    <p class="sub">Pick a few topics you love.</p>
+    <div class="chips" id="chips">
+      <div class="chip">Tech</div><div class="chip">Travel</div><div class="chip">Food</div>
+      <div class="chip">Fashion</div><div class="chip">Music</div><div class="chip">Sports</div>
+      <div class="chip">Art</div><div class="chip">Gaming</div>
+    </div>
+    <div class="row"><button class="btn-back" onclick="prev(3)">Back</button><button class="btn-primary" onclick="next(3)">Continue</button></div>
+  </div>
+
+  <div class="step" id="s4">
+    <h2>Secure your account</h2>
+    <p class="sub">Create a password.</p>
+    <input type="password" placeholder="Password" />
+    <input type="password" placeholder="Confirm password" />
+    <div class="row"><button class="btn-back" onclick="prev(4)">Back</button><button class="btn-primary" onclick="finish()">Create Account</button></div>
+  </div>
+
+  <div class="step" id="s5">
+    <div class="done">
+      <div class="check">✓</div>
+      <h2>You're all set!</h2>
+      <p class="sub" id="welcomeMsg">Welcome aboard.</p>
+    </div>
+  </div>
+</div>
+<script>
+  let current = 1;
+  function show(n){ for(let i=1;i<=5;i++){document.getElementById('s'+i).classList.toggle('active', i===n);} for(let i=1;i<=4;i++){document.getElementById('d'+i).classList.toggle('active', i<=Math.min(n,4));} current=n; }
+  function next(n){ show(n+1); }
+  function prev(n){ show(n-1); }
+  function finish(){ const name = document.getElementById('name').value || 'friend'; document.getElementById('welcomeMsg').textContent = 'Welcome aboard, ' + name + '!'; show(5); }
+  document.querySelectorAll('#chips .chip').forEach(c => c.onclick = () => c.classList.toggle('selected'));
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DivLuxe Summer Sale — Email Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f1f5f9;font-family:'Inter',sans-serif;color:#0f172a;min-height:100vh;padding:2rem 0}
+  .page{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:#fff;border:1px solid #e2e8f0;border-radius:1rem;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+  .topbar a{color:#475569;text-decoration:none;font-size:.85rem}
+  .topbar h1{font-size:.95rem;font-weight:500;color:#0f172a}
+  .toggle{display:inline-flex;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:.6rem;padding:.25rem}
+  .toggle button{background:transparent;border:0;font:inherit;font-size:.75rem;color:#64748b;padding:.4rem .9rem;border-radius:.45rem;cursor:pointer}
+  .toggle button.active{background:#fff;color:#0f172a;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  /* mail client chrome */
+  .mail{margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:1.25rem;box-shadow:0 30px 60px -30px rgba(15,23,42,.2);overflow:hidden;transition:max-width .35s ease}
+  .mail.desktop{max-width:760px}
+  .mail.mobile{max-width:380px}
+  .mail-head{background:#f8fafc;border-bottom:1px solid #f1f5f9;padding:.85rem 1.25rem;font-size:.75rem;color:#64748b}
+  .mail-head .row{display:flex;justify-content:space-between;gap:1rem}
+  .mail-head strong{color:#0f172a;font-weight:500}
+  /* email body */
+  .email{background:#0a0a0a;color:#f5f5f5}
+  .hero{background:radial-gradient(ellipse at top,#3a2a08 0%,#0a0a0a 70%);padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><circle cx=%2220%22 cy=%2230%22 r=%221%22 fill=%22%23fcd34d%22 opacity=%22.3%22/><circle cx=%2270%22 cy=%2260%22 r=%221.5%22 fill=%22%23fcd34d%22 opacity=%22.4%22/><circle cx=%2245%22 cy=%2280%22 r=%221%22 fill=%22%23fcd34d%22 opacity=%22.3%22/></svg>');background-size:100px 100px;opacity:.6}
+  .hero > *{position:relative;z-index:1}
+  .brand{font-family:'Cormorant Garamond',serif;font-size:1.6rem;letter-spacing:.4em;color:#fcd34d;font-weight:600}
+  .brand-sub{font-size:.55rem;letter-spacing:.4em;color:#a3a3a3;text-transform:uppercase;margin-top:4px}
+  .badge{display:inline-block;margin-top:1.5rem;background:rgba(252,211,77,.12);border:1px solid #fcd34d;color:#fcd34d;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:9999px}
+  .hero h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.25rem,6vw,3.5rem);margin-top:1.25rem;line-height:1;font-weight:600}
+  .hero h2 em{font-weight:400;font-style:italic;color:#fde68a;display:block}
+  .big{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vw,5rem);color:#fcd34d;margin-top:1rem;font-weight:600;letter-spacing:.05em}
+  .hero p.lead{margin-top:1rem;color:#a3a3a3;font-size:.95rem;max-width:380px;margin-left:auto;margin-right:auto}
+  .countdown{margin-top:1.5rem;color:#fcd34d;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase}
+  .cta-row{margin-top:1.75rem}
+  .cta{display:inline-block;background:#fcd34d;color:#0a0a0a;padding:1rem 2.25rem;border-radius:9999px;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;font-weight:500;text-decoration:none}
+  /* categories strip */
+  .strip{display:grid;grid-template-columns:repeat(3,1fr);background:#0f0f0f;border-block:1px solid #1f1f1f}
+  .strip div{padding:1.25rem .5rem;text-align:center;border-right:1px solid #1f1f1f}
+  .strip div:last-child{border-right:0}
+  .strip p:first-child{font-size:1.1rem;color:#fcd34d;font-family:'Cormorant Garamond',serif;font-weight:600}
+  .strip p+p{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#737373;margin-top:.25rem}
+  /* products */
+  .section-title{text-align:center;padding:2.5rem 1rem .5rem;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:#fcd34d}
+  .section-title + h3{text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.75rem;color:#f5f5f5;font-weight:600;margin-bottom:1.5rem}
+  .products{padding:0 1.25rem 2rem;display:flex;flex-direction:column;gap:1rem}
+  .mail.desktop .products{flex-direction:row}
+  .ep{flex:1;background:#141414;border:1px solid #1f1f1f;border-radius:.85rem;overflow:hidden;display:flex;flex-direction:column}
+  .ep img{width:100%;aspect-ratio:1/1;object-fit:cover}
+  .ep-body{padding:1rem;text-align:center}
+  .ep-name{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#f5f5f5}
+  .ep-price{font-size:.85rem;margin-top:.35rem;color:#a3a3a3}
+  .ep-price s{color:#525252;margin-right:.25rem}
+  .ep-price strong{color:#fcd34d;font-weight:500}
+  .ep-cta{display:inline-block;margin-top:.85rem;color:#fcd34d;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(252,211,77,.4);padding-bottom:.15rem}
+  /* code */
+  .code{margin:1.5rem 1.25rem;padding:1.25rem;border:1px dashed rgba(252,211,77,.5);background:rgba(252,211,77,.05);text-align:center;border-radius:.6rem}
+  .code p{font-size:.8rem;color:#fde68a}
+  .code strong{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fcd34d;letter-spacing:.2em;display:block;margin-bottom:.25rem}
+  /* footer */
+  .efoot{background:#000;padding:1.75rem 1.25rem;text-align:center;font-size:.7rem;color:#737373;border-top:1px solid #1f1f1f}
+  .efoot a{color:#a3a3a3;text-decoration:underline}
+  .legal{padding:1.25rem;text-align:center;font-size:.65rem;color:#525252;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <a href="../">← All projects</a>
+    <h1>DivLuxe Summer Sale — Promotional Email</h1>
+    <div class="toggle">
+      <button id="dt" class="active">Desktop</button>
+      <button id="mb">Mobile</button>
+    </div>
+  </div>
+
+  <div class="mail desktop" id="mail">
+    <div class="mail-head">
+      <div class="row"><span><strong>From:</strong> DivLuxe Maison &lt;maison@divluxe.com&gt;</span><span>Today, 09:14 AM</span></div>
+      <div style="margin-top:4px"><strong>Subject:</strong> ✨ The Summer Sale is here — up to 40% off diamonds, gold &amp; silver</div>
+    </div>
+    <div class="email">
+      <div class="hero">
+        <div class="brand">DIVLUXE</div>
+        <div class="brand-sub">Where Luxury Meets Beauty</div>
+        <span class="badge">Summer Sale 2026</span>
+        <h2>Brilliance,<em>at a brilliant price.</em></h2>
+        <div class="big">UP TO 40% OFF</div>
+        <p class="lead">Our biggest sale of the year on certified diamonds, 22K gold &amp; sterling silver fine jewellery.</p>
+        <p class="countdown">⏳ Offer ends Sunday · 72 hours only</p>
+        <div class="cta-row"><a href="#" class="cta">Shop the Sale →</a></div>
+      </div>
+
+      <div class="strip">
+        <div><p>Diamonds</p><p>Up to 30% off</p></div>
+        <div><p>22K Gold</p><p>Up to 40% off</p></div>
+        <div><p>Silver</p><p>Up to 25% off</p></div>
+      </div>
+
+      <p class="section-title">Featured Edit</p>
+      <h3>Maison favourites — on sale</h3>
+      <div class="products">
+              <div class="ep">
+                <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/237e4480-8b5b-4dfd-8a24-5d120cf5b038/jewel-image.png" alt="Brilliant Solitaire Ring">
+                <div class="ep-body">
+                  <p class="ep-name">Brilliant Solitaire Ring</p>
+                  <p class="ep-price"><s>₹2,84,999</s> <strong>₹1,99,499</strong></p>
+                  <a href="#" class="ep-cta">Shop</a>
+                </div>
+              </div>
+
+              <div class="ep">
+                <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/c021db98-118a-4436-9d09-9f2ce3dd6af0/jewel-image-6.png" alt="Diamond Bracelets">
+                <div class="ep-body">
+                  <p class="ep-name">Diamond Bracelets</p>
+                  <p class="ep-price"><s>₹3,45,000</s> <strong>₹2,41,500</strong></p>
+                  <a href="#" class="ep-cta">Shop</a>
+                </div>
+              </div>
+
+              <div class="ep">
+                <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/b4f0c85b-b654-43d2-a174-48f223a46191/jewel-image-7.png" alt="Emerald Bridal Set">
+                <div class="ep-body">
+                  <p class="ep-name">Emerald Bridal Set</p>
+                  <p class="ep-price"><s>₹12,40,000</s> <strong>₹8,68,000</strong></p>
+                  <a href="#" class="ep-cta">Shop</a>
+                </div>
+              </div>
+      </div>
+
+      <div class="code">
+        <strong>SUMMER40</strong>
+        <p>Use at checkout · Free worldwide delivery · Lifetime warranty</p>
+      </div>
+
+      <div class="efoot">
+        © 2026 DivLuxe Maison · 12 Maison Row, Hyderabad<br>
+        <a href="#">Unsubscribe</a> · <a href="#">Preferences</a> · <a href="#">View in browser</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="legal" style="color:#94a3b8">A CodSoft UI/UX Task · Email Template Design</p>
+</div>
+
+<script>
+  const mail=document.getElementById('mail');
+  document.getElementById('dt').addEventListener('click',e=>{mail.classList.remove('mobile');mail.classList.add('desktop');e.target.classList.add('active');mb.classList.remove('active');});
+  document.getElementById('mb').addEventListener('click',e=>{mail.classList.remove('desktop');mail.classList.add('mobile');e.target.classList.add('active');dt.classList.remove('active');});
+</script>
+</body>
+</html>
