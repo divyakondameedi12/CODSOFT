@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DivLuxe — Where Luxury Meets Beauty</title>
+<meta name="description" content="Curated fine jewellery, diamonds and premium beauty essentials.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#000;color:#f5f5f5;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  /* header */
+  header{position:sticky;top:0;z-index:40;background:rgba(0,0,0,.85);backdrop-filter:blur(14px);border-bottom:1px solid #171717}
+  .nav{max-width:1280px;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .nav a.back{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#737373}
+  .nav a.back:hover{color:#fcd34d}
+  .brand{text-align:center}
+  .brand h1{font-family:'Cormorant Garamond',serif;font-size:1.6rem;letter-spacing:.3em;color:#fcd34d;font-weight:600}
+  .brand small{display:block;font-size:.55rem;letter-spacing:.4em;text-transform:uppercase;color:#737373;margin-top:2px}
+  .nav-right{display:flex;align-items:center;gap:1rem}
+  .search{background:#0a0a0a;border:1px solid #262626;border-radius:9999px;padding:.45rem 1rem;color:#f5f5f5;font:inherit;font-size:.8rem;width:200px;outline:none;transition:.2s}
+  .search::placeholder{color:#525252}
+  .search:focus{border-color:#fcd34d}
+  .bag{background:transparent;border:0;color:#f5f5f5;font:inherit;font-size:.85rem;cursor:pointer;display:flex;align-items:center;gap:.4rem}
+  .bag-count{background:#fcd34d;color:#000;font-size:.65rem;font-weight:500;height:20px;min-width:20px;border-radius:9999px;display:inline-flex;align-items:center;justify-content:center;padding:0 .35rem}
+  /* hero */
+  .hero{position:relative;height:90vh;overflow:hidden;display:flex;align-items:center}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a,#1a1208,#000);animation:shift 12s ease-in-out infinite alternate}
+  @keyframes shift{from{filter:hue-rotate(0)}to{filter:hue-rotate(20deg)}}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;animation:zoom 18s ease-out infinite alternate}
+  @keyframes zoom{from{transform:scale(1.02)}to{transform:scale(1.12)}}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.5) 50%,transparent 100%)}
+  .hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 2rem;width:100%}
+  .hero-inner .eyebrow{font-size:.7rem;letter-spacing:.4em;color:#fcd34d;text-transform:uppercase;animation:slide 1s .1s both}
+  .hero-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vw,7rem);line-height:.92;font-weight:600;margin-top:1.5rem;max-width:720px;animation:slide 1s .3s both}
+  .hero-inner h2 em{font-weight:300;font-style:italic;color:#fde68a;display:block}
+  .hero-inner p{margin-top:1.5rem;max-width:460px;color:#a3a3a3;font-size:1.05rem;animation:slide 1s .5s both}
+  @keyframes slide{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  .hero-btns{margin-top:2rem;display:flex;gap:.75rem;flex-wrap:wrap;animation:slide 1s .7s both}
+  .btn-gold{background:#fcd34d;color:#000;padding:.95rem 2rem;border-radius:9999px;font-size:.8rem;font-weight:500;transition:.25s}
+  .btn-gold:hover{background:#fde68a;transform:translateY(-2px);box-shadow:0 12px 40px -10px rgba(252,211,77,.5)}
+  .btn-out{border:1px solid #404040;padding:.95rem 2rem;border-radius:9999px;font-size:.8rem;color:#e5e5e5;transition:.25s}
+  .btn-out:hover{border-color:#fcd34d;color:#fcd34d}
+  /* category bar */
+  .shop{max-width:1280px;margin:0 auto;padding:5rem 1.5rem 1.5rem}
+  .shop-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-bottom:1.25rem;border-bottom:1px solid #171717}
+  .shop-head .eyebrow{font-size:.7rem;letter-spacing:.3em;color:#fcd34d;text-transform:uppercase}
+  .shop-head h3{font-family:'Cormorant Garamond',serif;font-size:2.25rem;margin-top:.5rem;font-weight:600}
+  .tabs{display:flex;gap:.25rem}
+  .tab{background:transparent;border:0;color:#737373;font:inherit;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:9999px;cursor:pointer;transition:.2s}
+  .tab:hover{color:#fcd34d}
+  .tab.active{background:#fcd34d;color:#000}
+  /* grid */
+  .grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));padding:3rem 0}
+  .product{opacity:0;animation:rise .8s both;animation-delay:var(--d)}
+  @keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  .product.hide{display:none}
+  .pimg{position:relative;background:#0a0a0a;border-radius:.75rem;overflow:hidden;aspect-ratio:1/1}
+  .pimg img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .product:hover .pimg img{transform:scale(1.08)}
+  .ptag{position:absolute;top:1rem;left:1rem;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);border:1px solid rgba(252,211,77,.5);color:#fcd34d;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .75rem;border-radius:9999px}
+  .pmeta{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:1.25rem}
+  .pcat{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#737373}
+  .pmeta h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-top:.25rem}
+  .pprice{margin-top:.25rem;color:#fcd34d;font-size:.95rem}
+  .bag-btn{flex:none;background:transparent;border:1px solid #404040;color:#e5e5e5;font:inherit;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:.55rem 1rem;border-radius:9999px;cursor:pointer;transition:.2s}
+  .bag-btn:hover{border-color:#fcd34d;color:#fcd34d}
+  .bag-btn.added{background:#fcd34d;color:#000;border-color:#fcd34d}
+  .empty{grid-column:1/-1;text-align:center;color:#525252;padding:4rem;font-size:.85rem}
+  /* promise */
+  .promise{border-block:1px solid #171717;background:rgba(20,15,8,.4);padding:2.5rem 1.5rem}
+  .promise-grid{max-width:1280px;margin:0 auto;display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));text-align:center}
+  .promise-grid p:first-child{color:#fcd34d;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+  .promise-grid p+p{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#a3a3a3;margin-top:.35rem}
+  footer{max-width:1280px;margin:0 auto;padding:3.5rem 1.5rem;text-align:center;font-size:.7rem;color:#525252}
+  /* cart drawer */
+  .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.3s;z-index:50}
+  .drawer-overlay.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;inset:0 0 0 auto;width:420px;max-width:100%;background:#0a0a0a;border-left:1px solid #262626;z-index:51;transform:translateX(100%);transition:.4s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column}
+  .drawer.open{transform:none}
+  .drawer-head{padding:1.5rem;border-bottom:1px solid #171717;display:flex;justify-content:space-between;align-items:center}
+  .drawer-head h4{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600}
+  .drawer-close{background:transparent;border:0;color:#737373;font-size:1.4rem;cursor:pointer}
+  .drawer-body{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+  .cart-item{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid #171717;align-items:center}
+  .cart-item img{width:60px;height:60px;border-radius:.5rem;object-fit:cover}
+  .cart-item .info{flex:1;min-width:0}
+  .cart-item .info h5{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}
+  .cart-item .info p{color:#fcd34d;font-size:.85rem;margin-top:.2rem}
+  .cart-item button{background:transparent;border:0;color:#525252;font:inherit;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+  .cart-item button:hover{color:#ef4444}
+  .drawer-foot{padding:1.5rem;border-top:1px solid #171717}
+  .total{display:flex;justify-content:space-between;margin-bottom:1rem;font-size:.95rem}
+  .total strong{color:#fcd34d;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600}
+  .checkout{display:block;width:100%;background:#fcd34d;color:#000;padding:1rem;border-radius:9999px;border:0;font:inherit;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:.2s}
+  .checkout:hover{background:#fde68a}
+  .empty-cart{padding:3rem 1rem;text-align:center;color:#525252;font-size:.85rem}
+  @media(max-width:640px){
+    .search{display:none}
+    .brand h1{font-size:1.2rem;letter-spacing:.2em}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="back" href="../">← Projects</a>
+    <div class="brand">
+      <h1>DIVLUXE</h1>
+      <small>Where Luxury Meets Beauty</small>
+    </div>
+    <div class="nav-right">
+      <input class="search" id="q" placeholder="Search…">
+      <button class="bag" id="bagBtn">Bag <span class="bag-count" id="count">0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <img class="hero-img" src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/91869fe2-5048-4e9a-a1b9-b39b9d7c4de9/jewel-image-8.png" alt="DivLuxe heritage diamond choker">
+  <div class="hero-inner">
+    <p class="eyebrow">The Maison Edit · 2026</p>
+    <h2>Where luxury<em>meets beauty.</em></h2>
+    <p>Hand-finished diamonds, emeralds & gold heritage pieces — curated alongside intimate beauty essentials for those who choose well.</p>
+    <div class="hero-btns">
+      <a class="btn-gold" href="#shop">Shop the collection</a>
+      <a class="btn-out" href="#shop" onclick="setCat('Jewellery')">View jewellery</a>
+    </div>
+  </div>
+</section>
+
+<section class="shop" id="shop">
+  <div class="shop-head">
+    <div>
+      <p class="eyebrow">Shop</p>
+      <h3>The Edit</h3>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-cat="All">All</button>
+      <button class="tab" data-cat="Jewellery">Jewellery</button>
+      <button class="tab" data-cat="Beauty">Beauty</button>
+    </div>
+  </div>
+  <div class="grid" id="grid">
+    
+      <article class="product" data-cat="Jewellery" data-name="aurora solitaire ring" data-id="1" style="--d:0ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/237e4480-8b5b-4dfd-8a24-5d120cf5b038/jewel-image.png" alt="Aurora Solitaire Ring" loading="lazy">
+          <span class="ptag">New</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Aurora Solitaire Ring</h3>
+            <p class="pprice">₹284,999</p>
+          </div>
+          <button class="bag-btn" data-id="1" data-price="284999" data-name="Aurora Solitaire Ring">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="sapphire cocktail ring" data-id="2" style="--d:60ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/6cf9bf6f-071d-4f84-9433-9be3cc1bb4da/jewel-image-2.png" alt="Sapphire Cocktail Ring" loading="lazy">
+          
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Sapphire Cocktail Ring</h3>
+            <p class="pprice">₹162,500</p>
+          </div>
+          <button class="bag-btn" data-id="2" data-price="162500" data-name="Sapphire Cocktail Ring">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="celeste diamond necklace" data-id="3" style="--d:120ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/362cea79-b9bd-4471-a7f5-327c3fb02377/jewel-image-3.png" alt="Celeste Diamond Necklace" loading="lazy">
+          <span class="ptag">Bestseller</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Celeste Diamond Necklace</h3>
+            <p class="pprice">₹549,000</p>
+          </div>
+          <button class="bag-btn" data-id="3" data-price="549000" data-name="Celeste Diamond Necklace">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="emerald bloom necklace" data-id="4" style="--d:180ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/ff7e1599-b12e-4e36-aed9-e84be24e864a/jewel-image-4.png" alt="Emerald Bloom Necklace" loading="lazy">
+          <span class="ptag">Couture</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Emerald Bloom Necklace</h3>
+            <p class="pprice">₹890,000</p>
+          </div>
+          <button class="bag-btn" data-id="4" data-price="890000" data-name="Emerald Bloom Necklace">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="heritage diamond-emerald bangles" data-id="5" style="--d:240ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/26599931-0f1e-4006-882a-fb675defaea6/jewel-image-5.png" alt="Heritage Diamond-Emerald Bangles" loading="lazy">
+          
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Heritage Diamond-Emerald Bangles</h3>
+            <p class="pprice">₹725,000</p>
+          </div>
+          <button class="bag-btn" data-id="5" data-price="725000" data-name="Heritage Diamond-Emerald Bangles">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="trio diamond bracelets" data-id="6" style="--d:300ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/c021db98-118a-4436-9d09-9f2ce3dd6af0/jewel-image-6.png" alt="Trio Diamond Bracelets" loading="lazy">
+          <span class="ptag">New</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Trio Diamond Bracelets</h3>
+            <p class="pprice">₹345,000</p>
+          </div>
+          <button class="bag-btn" data-id="6" data-price="345000" data-name="Trio Diamond Bracelets">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="emerald bridal set" data-id="7" style="--d:360ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/b4f0c85b-b654-43d2-a174-48f223a46191/jewel-image-7.png" alt="Emerald Bridal Set" loading="lazy">
+          <span class="ptag">Bridal</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Emerald Bridal Set</h3>
+            <p class="pprice">₹1,240,000</p>
+          </div>
+          <button class="bag-btn" data-id="7" data-price="1240000" data-name="Emerald Bridal Set">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="royal diamond choker" data-id="8" style="--d:420ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/91869fe2-5048-4e9a-a1b9-b39b9d7c4de9/jewel-image-8.png" alt="Royal Diamond Choker" loading="lazy">
+          <span class="ptag">Heritage</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Royal Diamond Choker</h3>
+            <p class="pprice">₹1,580,000</p>
+          </div>
+          <button class="bag-btn" data-id="8" data-price="1580000" data-name="Royal Diamond Choker">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="emerald chandelier earrings" data-id="9" style="--d:480ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/7d9dd221-1e96-4f01-94d9-5adaae0dbbc7/jewel-image-9.png" alt="Emerald Chandelier Earrings" loading="lazy">
+          
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Emerald Chandelier Earrings</h3>
+            <p class="pprice">₹468,000</p>
+          </div>
+          <button class="bag-btn" data-id="9" data-price="468000" data-name="Emerald Chandelier Earrings">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Jewellery" data-name="aquamarine pear drops" data-id="10" style="--d:540ms">
+        <div class="pimg">
+          <img src="https://id-preview--cf35e2f5-4ee3-4bcb-a181-6a648264de75.lovable.app/__l5e/assets-v1/eefb0dae-2520-4b83-881d-63ae945c6532/jewel-image-10.png" alt="Aquamarine Pear Drops" loading="lazy">
+          <span class="ptag">Limited</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Jewellery</p>
+            <h3>Aquamarine Pear Drops</h3>
+            <p class="pprice">₹392,000</p>
+          </div>
+          <button class="bag-btn" data-id="10" data-price="392000" data-name="Aquamarine Pear Drops">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Beauty" data-name="velvet crimson lipstick" data-id="11" style="--d:600ms">
+        <div class="pimg">
+          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80" alt="Velvet Crimson Lipstick" loading="lazy">
+          <span class="ptag">Bestseller</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Beauty</p>
+            <h3>Velvet Crimson Lipstick</h3>
+            <p class="pprice">₹2,400</p>
+          </div>
+          <button class="bag-btn" data-id="11" data-price="2400" data-name="Velvet Crimson Lipstick">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Beauty" data-name="noir velvet matte lipstick" data-id="12" style="--d:660ms">
+        <div class="pimg">
+          <img src="https://images.unsplash.com/photo-1631214540242-3cd8c4b0b9b1?w=800&q=80" alt="Noir Velvet Matte Lipstick" loading="lazy">
+          
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Beauty</p>
+            <h3>Noir Velvet Matte Lipstick</h3>
+            <p class="pprice">₹2,800</p>
+          </div>
+          <button class="bag-btn" data-id="12" data-price="2800" data-name="Noir Velvet Matte Lipstick">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Beauty" data-name="noir parfum 50ml" data-id="13" style="--d:720ms">
+        <div class="pimg">
+          <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80" alt="Noir Parfum 50ml" loading="lazy">
+          <span class="ptag">Limited</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Beauty</p>
+            <h3>Noir Parfum 50ml</h3>
+            <p class="pprice">₹8,900</p>
+          </div>
+          <button class="bag-btn" data-id="13" data-price="8900" data-name="Noir Parfum 50ml">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Beauty" data-name="24k radiance serum" data-id="14" style="--d:780ms">
+        <div class="pimg">
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80" alt="24K Radiance Serum" loading="lazy">
+          
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Beauty</p>
+            <h3>24K Radiance Serum</h3>
+            <p class="pprice">₹5,600</p>
+          </div>
+          <button class="bag-btn" data-id="14" data-price="5600" data-name="24K Radiance Serum">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Beauty" data-name="rose quartz highlighter" data-id="15" style="--d:840ms">
+        <div class="pimg">
+          <img src="https://images.unsplash.com/photo-1599733589046-833caccbbd03?w=800&q=80" alt="Rose Quartz Highlighter" loading="lazy">
+          
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Beauty</p>
+            <h3>Rose Quartz Highlighter</h3>
+            <p class="pprice">₹3,200</p>
+          </div>
+          <button class="bag-btn" data-id="15" data-price="3200" data-name="Rose Quartz Highlighter">Add</button>
+        </div>
+      </article>
+
+      <article class="product" data-cat="Beauty" data-name="silk eye palette" data-id="16" style="--d:900ms">
+        <div class="pimg">
+          <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80" alt="Silk Eye Palette" loading="lazy">
+          <span class="ptag">New</span>
+        </div>
+        <div class="pmeta">
+          <div>
+            <p class="pcat">Beauty</p>
+            <h3>Silk Eye Palette</h3>
+            <p class="pprice">₹4,800</p>
+          </div>
+          <button class="bag-btn" data-id="16" data-price="4800" data-name="Silk Eye Palette">Add</button>
+        </div>
+      </article>
+    <p class="empty" id="empty" style="display:none">No pieces match your search.</p>
+  </div>
+</section>
+
+<section class="promise">
+  <div class="promise-grid">
+    <div><p>Complimentary</p><p>Worldwide Delivery</p></div>
+    <div><p>Lifetime</p><p>Jewellery Warranty</p></div>
+    <div><p>Hallmarked</p><p>22K & 18K Gold</p></div>
+    <div><p>Concierge</p><p>Personal Stylist</p></div>
+  </div>
+</section>
+
+<footer>© DivLuxe Maison · A CodSoft UI/UX Task</footer>
+
+<!-- Cart drawer -->
+<div class="drawer-overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h4>Your Bag</h4>
+    <button class="drawer-close" id="closeDrawer">×</button>
+  </div>
+  <div class="drawer-body" id="cartList"></div>
+  <div class="drawer-foot">
+    <div class="total"><span>Total</span><strong id="total">₹0</strong></div>
+    <button class="checkout">Proceed to Checkout</button>
+  </div>
+</aside>
+
+<script>
+  const cart = new Map(); // id -> {name, price, img, qty}
+  const fmt = n => '₹' + n.toLocaleString('en-IN');
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const tabs = document.querySelectorAll('.tab');
+  const q = document.getElementById('q');
+  const products = document.querySelectorAll('.product');
+  let currentCat = 'All';
+
+  function applyFilter(){
+    const term = q.value.trim().toLowerCase();
+    let visible = 0;
+    products.forEach(p=>{
+      const ok = (currentCat==='All'||p.dataset.cat===currentCat) && p.dataset.name.includes(term);
+      p.classList.toggle('hide', !ok);
+      if(ok) visible++;
+    });
+    empty.style.display = visible===0 ? 'block' : 'none';
+  }
+
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    currentCat = t.dataset.cat;
+    applyFilter();
+  }));
+  function setCat(c){
+    tabs.forEach(t=>t.classList.toggle('active', t.dataset.cat===c));
+    currentCat = c; applyFilter();
+  }
+  window.setCat = setCat;
+  q.addEventListener('input', applyFilter);
+
+  document.querySelectorAll('.bag-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const id = b.dataset.id;
+      if(cart.has(id)){
+        cart.delete(id);
+        b.classList.remove('added'); b.textContent='Add';
+      } else {
+        const card = b.closest('.product');
+        cart.set(id, {
+          name: b.dataset.name,
+          price: parseInt(b.dataset.price),
+          img: card.querySelector('img').src,
+          qty: 1,
+        });
+        b.classList.add('added'); b.textContent='✓';
+      }
+      renderCart();
+    });
+  });
+
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  const open = ()=>{drawer.classList.add('open');overlay.classList.add('open');};
+  const close = ()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+  document.getElementById('bagBtn').addEventListener('click', open);
+  document.getElementById('closeDrawer').addEventListener('click', close);
+  overlay.addEventListener('click', close);
+
+  function renderCart(){
+    document.getElementById('count').textContent = cart.size;
+    const list = document.getElementById('cartList');
+    if(cart.size===0){
+      list.innerHTML = '<p class="empty-cart">Your bag is empty.</p>';
+      document.getElementById('total').textContent = '₹0';
+      return;
+    }
+    let total=0;
+    list.innerHTML = '';
+    cart.forEach((item,id)=>{
+      total += item.price * item.qty;
+      const el = document.createElement('div');
+      el.className='cart-item';
+      el.innerHTML = `
+        <img src="${item.img}" alt="${item.name}">
+        <div class="info"><h5>${item.name}</h5><p>${fmt(item.price)}</p></div>
+        <button data-id="${id}">Remove</button>`;
+      el.querySelector('button').addEventListener('click',()=>{
+        cart.delete(id);
+        const b = document.querySelector(`.bag-btn[data-id="${id}"]`);
+        if(b){b.classList.remove('added'); b.textContent='Add';}
+        renderCart();
+      });
+      list.appendChild(el);
+    });
+    document.getElementById('total').textContent = fmt(total);
+  }
+  renderCart();
+</script>
+</body>
+</html>
