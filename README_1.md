@@ -55,16 +55,7 @@ A luxury promotional email designed for **DivLuxe Maison**, a fine jewellery bra
 ---
 
 ### Task 3 — Restaurant Menu UI
-**File:** `task3-restaurant.html`
-
-A full restaurant menu UI for **Amma Muddha — Village Kitchen**, an Andhra & Telangana cuisine brand.
-
-**Features:**
-- Immersive hero with parallax zoom animation
-- Categorized menu sections (Starters, Mains, Thalis, Desserts, Drinks)
-- Warm earthy dark palette inspired by traditional South Indian food
-- Reservation CTA and smooth scroll navigation
-- Fully responsive across devices
+| 3 | Restaurant Menu UI (React + Vite) | [View →](https://codsoft-7o1l.vercel.app/) |
 
 **Design Highlights:** Deep brown (#1A0F08) background, golden food imagery, serif + light Inter pairing.
 
