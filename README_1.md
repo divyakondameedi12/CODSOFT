@@ -15,7 +15,7 @@ All 4 UI/UX tasks completed as part of the CodSoft internship program. Each proj
 |---|------|-----------|
 | 1 | Mobile App Sign-Up Flow | [View →](https://divyakondameedi12.github.io/CODSOFT/task1-signup.html) |
 | 2 | Promotional Email Template | [View →](https://divyakondameedi12.github.io/CODSOFT/task2-email.html) |
-| 3 | Restaurant Menu UI | [View →](https://divyakondameedi12.github.io/CODSOFT/task3-restaurant.html) |
+| 3 | Restaurant Menu UI (React + Vite) | [View →](https://codsoft-7o1l.vercel.app/) |
 | 4 | E-Commerce Website | [View →](https://divyakondameedi12.github.io/CODSOFT/task4-ecommerce.html) |
 
 ---
@@ -55,7 +55,12 @@ A luxury promotional email designed for **DivLuxe Maison**, a fine jewellery bra
 ---
 
 ### Task 3 — Restaurant Menu UI
-| 3 | Restaurant Menu UI (React + Vite) | [View →](https://codsoft-7o1l.vercel.app/) |
+✨ Features:
+→ Built with React + Vite + Tailwind CSS
+→ Categorized menu with smooth navigation
+→ Warm earthy theme inspired by traditional South Indian cuisine
+→ Fully responsive design
+→ Deployed live on Vercel
 
 **Design Highlights:** Deep brown (#1A0F08) background, golden food imagery, serif + light Inter pairing.
 
